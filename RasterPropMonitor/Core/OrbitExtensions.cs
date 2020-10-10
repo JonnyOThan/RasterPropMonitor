@@ -266,7 +266,7 @@ namespace JSI
         public static double TrueAnomalyFromVector(this Orbit o, Vector3d vec)
         {
             Vector3d projected = Vector3d.Exclude(o.SwappedOrbitNormal(), vec);
-            Vector3d vectorToPe = o.eccVec.xzy;
+            Vector3d vectorToPe = o.GetEccVector().xzy;
             double angleFromPe = Math.Abs(Vector3d.Angle(vectorToPe, projected));
 
             //If the vector points to the infalling part of the orbit then we need to do 360 minus the
