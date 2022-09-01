@@ -1,4 +1,4 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  * RasterPropMonitor
  * =================
  * Plugin for Kerbal Space Program
@@ -571,7 +571,7 @@ namespace JSI
                 // we update crew assignments, so we keep polling it here.
                 for (int i = 0; i < part.internalModel.seats.Count; i++)
                 {
-                    if (localCrew[i] != null)
+                    if (localCrew[i] != null && localCrew[i].KerbalRef != null)
                     {
                         kerbalExpressionSystem kES = localCrewMedical[i];
                         localCrew[i].KerbalRef.GetComponentCached<kerbalExpressionSystem>(ref kES);

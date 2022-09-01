@@ -1,4 +1,4 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  * RasterPropMonitor
  * =================
  * Plugin for Kerbal Space Program
@@ -30,6 +30,7 @@ namespace JSI
         private readonly Part ourPart;
         private GameObject cameraTransform;
         private Part cameraPart;
+		public JSIExternalCameraSelector CameraSelectorModule { get; private set; }
         private readonly int fxCameraIndex = 6;
 		private readonly int farCameraIndex = 4;
 		private readonly bool skipFarCamera =
@@ -73,8 +74,25 @@ namespace JSI
             flickerCounter = 0;
         }
 
+        public bool PointCamera(SteerableCameraParameters cameraParameters)
+        {
+            bool result = PointCamera(cameraParameters.cameraTransform, cameraParameters.currentFoV);
+            if (result)
+            {
+                if (CameraSelectorModule != null)
+                {
+                    cameraParameters.fovLimits.x = CameraSelectorModule.cameraFoVMin;
+                    cameraParameters.fovLimits.y = CameraSelectorModule.cameraFoVMax;
+                    FOV = cameraParameters.currentFoV = CameraSelectorModule.cameraFoVMax;
+                }
+            }
+
+            return result;
+        }
+
         public bool PointCamera(string newCameraName, float initialFOV)
         {
+            CameraSelectorModule = null;
             CleanupCameraObjects();
             if (!string.IsNullOrEmpty(newCameraName))
             {
@@ -218,6 +236,7 @@ namespace JSI
             {
                 cameraTransform = location.gameObject;
                 cameraPart = thatpart;
+                CameraSelectorModule = cameraPart.FindModuleImplementing<JSIExternalCameraSelector>();
                 return true;
             }
             return false;

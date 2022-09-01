@@ -1,4 +1,4 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  * RasterPropMonitor
  * =================
  * Plugin for Kerbal Space Program
@@ -46,14 +46,19 @@ namespace JSI
         [UI_Toggle(disabledText = "off", enabledText = "on")]
         [KSPField(guiActiveEditor = true, guiName = "FOV marker ", isPersistant = true)]
         public bool showCones = true;
-        
+
+        [KSPField]
+        public float cameraFoVMax = 60;
+
+        [KSPField]
+        public float cameraFoVMin = 5;
+
         // The rest of it
         private GameObject lightCone;
         private LineRenderer lightConeRenderer;
 		private static Material lightConeMaterial;
         private Transform actualCamera;
         private const float endSpan = 15f;
-        private const float fovAngle = 60f;
 
         [KSPEvent(guiActive = true, guiActiveEditor = true, guiName = "ID +")]
         public void IdPlus()
@@ -226,7 +231,7 @@ namespace JSI
                     Vector3 origin = actualCamera.transform.TransformPoint(Vector3.zero);
                     Vector3 direction = actualCamera.transform.TransformDirection(Vector3.forward);
                     lightConeRenderer.SetPosition(0, origin);
-                    lightConeRenderer.SetPosition(1, origin + direction * (endSpan / 2 / Mathf.Tan(Mathf.Deg2Rad * fovAngle / 2)));
+                    lightConeRenderer.SetPosition(1, origin + direction * (endSpan / 2 / Mathf.Tan(Mathf.Deg2Rad * cameraFoVMax / 2)));
                 }
             }
         }

@@ -1,4 +1,4 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  * RasterPropMonitor
  * =================
  * Plugin for Kerbal Space Program
@@ -166,6 +166,8 @@ namespace JSI
         private float consumeWhileActiveAmount;
         private bool forcedShutdown;
 
+        static readonly char[] INTERNAL_LIGHT_NAME_SEPARATORS = new char[] { '|' };
+
         public void Start()
         {
             if (HighLogic.LoadedSceneIsEditor)
@@ -269,7 +271,8 @@ namespace JSI
                     {
                         case "intlight":
                             persistentVarName = internalLightName;
-                            if (!string.IsNullOrEmpty(internalLightName))
+                            string[] lightNames = internalLightName?.Split(INTERNAL_LIGHT_NAME_SEPARATORS, StringSplitOptions.RemoveEmptyEntries);
+                            if (lightNames != null && lightNames.Length > 0)
                             {
                                 Light[] availableLights = internalModel.FindModelComponents<Light>();
                                 if (availableLights != null && availableLights.Length > 0)
@@ -277,7 +280,7 @@ namespace JSI
                                     List<Light> lights = new List<Light>(availableLights);
                                     for (int i = lights.Count - 1; i >= 0; --i)
                                     {
-                                        if (lights[i].name != internalLightName)
+                                        if (lightNames.IndexOf(lights[i].name) < 0)
                                         {
                                             lights.RemoveAt(i);
                                         }

@@ -565,6 +565,8 @@ namespace JSI
             hottestEngineTemperature = hottestEngineMaxTemperature = 0.0f;
             anyEnginesOverheating = anyEnginesFlameout = anyEnginesEnabled = false;
 
+            activeEngineCount = 0;
+
             float averageIspContribution = 0.0f;
             float maxIspContribution = 0.0f;
             List<Part> visitedParts = new List<Part>();

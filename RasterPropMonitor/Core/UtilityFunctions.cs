@@ -1776,6 +1776,28 @@ namespace JSI
             JUtil.LogInfo(this, "Found {0} RPM shaders and {1} fonts.", JUtil.parsedShaders.Count, JUtil.loadedFonts.Count);
         }
 
+        public static void WaitCoroutine(IEnumerator func)
+        {
+            while (func.MoveNext())
+            {
+                if (func.Current != null)
+                {
+                    IEnumerator num;
+                    try
+                    {
+                        num = (IEnumerator)func.Current;
+                    }
+                    catch (InvalidCastException)
+                    {
+                        if (func.Current.GetType() == typeof(WaitForSeconds))
+                            Debug.LogWarning("Skipped call to WaitForSeconds. Use WaitForSecondsRealtime instead.");
+                        return;  // Skip WaitForSeconds, WaitForEndOfFrame and WaitForFixedUpdate
+                    }
+                    WaitCoroutine(num);
+                }
+            }
+        }
+
         /// <summary>
         /// Wake up and ask for all of the shaders in our asset bundle and kick off
         /// the coroutines that look for global RPM config data.
@@ -1864,7 +1886,8 @@ namespace JSI
 
             LoadAssets();
 
-            StartCoroutine("LoadRasterPropMonitorValues");
+            //StartCoroutine("LoadRasterPropMonitorValues");
+            WaitCoroutine(LoadRasterPropMonitorValues());
 
             // Register a callback with ModuleManager so we can get notified
             // of database reloads.
@@ -2104,7 +2127,8 @@ namespace JSI
         public void PostPatchCallback()
         {
             JUtil.LogMessage(this, "ModuleManager has reloaded - reloading RPM values");
-            StartCoroutine("LoadRasterPropMonitorValues");
+            //StartCoroutine("LoadRasterPropMonitorValues");
+            WaitCoroutine(LoadRasterPropMonitorValues());
         }
 
         private bool RegisterWithModuleManager()

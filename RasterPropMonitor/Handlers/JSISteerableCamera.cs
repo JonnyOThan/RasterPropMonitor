@@ -1,4 +1,4 @@
-/*****************************************************************************
+﻿/*****************************************************************************
  * RasterPropMonitor
  * =================
  * Plugin for Kerbal Space Program
@@ -244,7 +244,7 @@ namespace JSI
             if (cameraObject == null)
             {
                 cameraObject = new FlyingCamera(part, cameraAspect);
-                cameraObject.PointCamera(activeCamera.cameraTransform, activeCamera.currentFoV);
+                cameraObject.PointCamera(activeCamera);
             }
 
             cameraObject.FOV = activeCamera.currentFoV;
@@ -504,7 +504,7 @@ namespace JSI
                 currentCamera = 0;
             }
 
-            bool gotCamera = cameraObject.PointCamera(cameras[currentCamera].cameraTransform, cameras[currentCamera].currentFoV);
+            bool gotCamera = cameraObject.PointCamera(cameras[currentCamera]);
 
             if (!skipMissingCameras)
             {
@@ -526,7 +526,7 @@ namespace JSI
                     currentCamera = 0;
                 }
 
-                gotCamera = cameraObject.PointCamera(cameras[currentCamera].cameraTransform, cameras[currentCamera].currentFoV);
+                gotCamera = cameraObject.PointCamera(cameras[currentCamera]);
             }
 
             //if (rpmComp != null)
@@ -548,7 +548,7 @@ namespace JSI
                 currentCamera = cameras.Count - 1;
             }
 
-            bool gotCamera = cameraObject.PointCamera(cameras[currentCamera].cameraTransform, cameras[currentCamera].currentFoV);
+            bool gotCamera = cameraObject.PointCamera(cameras[currentCamera]);
 
             if (!skipMissingCameras)
             {
@@ -570,7 +570,7 @@ namespace JSI
                     currentCamera = cameras.Count - 1;
                 }
 
-                gotCamera = cameraObject.PointCamera(cameras[currentCamera].cameraTransform, cameras[currentCamera].currentFoV);
+                gotCamera = cameraObject.PointCamera(cameras[currentCamera]);
             }
             //if (rpmComp != null)
             //{
@@ -723,7 +723,7 @@ namespace JSI
     public class SteerableCameraParameters
     {
         public readonly string cameraTransform;
-        public readonly Vector2 fovLimits;
+        public Vector2 fovLimits;
         public readonly Vector2 yawLimits;
         public readonly Vector2 pitchLimits;
         public readonly float zoomRate;

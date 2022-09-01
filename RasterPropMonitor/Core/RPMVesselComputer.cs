@@ -684,14 +684,10 @@ namespace JSI
 
         public void OnDestroy()
         {
-            if (vessel == null)// || vid == Guid.Empty)
-            {
-                return;
-            }
-            if (!HighLogic.LoadedSceneIsFlight)
-            {
-                return;
-            }
+            //if (!HighLogic.LoadedSceneIsFlight)
+            //{
+            //    return;
+            //}
 
             //if (vid != vessel.id)
             //{
@@ -707,6 +703,11 @@ namespace JSI
             GameEvents.onPartUndock.Remove(onPartUndock);
 #endif
             GameEvents.onVesselDestroy.Remove(onVesselDestroy);
+
+            if (vessel == null)// || vid == Guid.Empty)
+            {
+                return;
+            }
 
             // This very likely was handled in the OnVesselDestroy callback,
             // but there is no harm trying again here.

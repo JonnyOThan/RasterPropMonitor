@@ -1,0 +1,8 @@
+Linuxgurugamer Changes
+
+Bug:
+	Four GameEvent callbacks weren't being released upon leaving the flight scene.  These were memory leaks and could cause other problems
+
+Fix
+	In the RPMVesselComputer.cs, in the OnDestroy method, remove the check for scene == FLIGHT.  Not needed since this can only be called when in flight, and by the time the OnDestroy is called, it isn't in flight anymore
+	in the RPMVesselComputer.cs, in the OnDestroy method, moved check for vessel == nul to AFTER the removal of the callbacks from the GameEvents
