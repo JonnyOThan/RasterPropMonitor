@@ -209,6 +209,7 @@ namespace JSI
         internal float actualMaxIsp;
         internal double altitudeASL;
         internal double altitudeBottom;
+        internal Dictionary<Part, double> altitudeCache = new Dictionary<Part, double>(); // Define assembly level dictionary for caching
         internal double altitudeTrue;
         internal Vector3d CoM;
         internal float hottestPartTemperature;
@@ -709,23 +710,41 @@ namespace JSI
             }
             //JUtil.LogMessage(this, "vessel.altitude = {0}, vessel.pqsAltitude = {2}, altitudeASL = {1}", vessel.altitude, altitudeASL, vessel.pqsAltitude);
 
-            float priorAltitudeBottom = (float)altitudeBottom;
+            float priorAltitudeBottom = (float) altitudeBottom;
             altitudeBottom = (vessel.mainBody.ocean) ? Math.Min(altitudeASL, altitudeTrue) : altitudeTrue;
+
             if (altitudeBottom < 500d)
             {
                 double lowestPoint = altitudeASL;
-                foreach (Part p in vessel.parts)
+                var parts = vessel.parts;  // Store parts in a variable
+
+                foreach (Part p in parts)
                 {
                     if (p.collider != null)
                     {
-                        Vector3d bottomPoint = p.collider.ClosestPointOnBounds(vessel.mainBody.position);
-                        double partBottomAlt = vessel.mainBody.GetAltitude(bottomPoint);
+                        double partBottomAlt;
+
+                        // If the part's altitude is in the cache, get it from there
+                        if (altitudeCache.ContainsKey(p))
+                        {
+                            partBottomAlt = altitudeCache[p];
+                        }
+                        else 
+                        {
+                            // Otherwise, calculate it and add it to the cache
+                            Vector3d bottomPoint = p.collider.ClosestPointOnBounds(vessel.mainBody.position);
+                            partBottomAlt = vessel.mainBody.GetAltitude(bottomPoint);
+                            altitudeCache[p] = partBottomAlt;
+                        }
+
                         lowestPoint = Math.Min(lowestPoint, partBottomAlt);
                     }
                 }
+
                 lowestPoint -= altitudeASL;
                 altitudeBottom += lowestPoint;
             }
+      
             altitudeBottom = Math.Max(0.0, altitudeBottom);
 
             float d1 = (float)altitudeBottom - priorAltitudeBottom;
