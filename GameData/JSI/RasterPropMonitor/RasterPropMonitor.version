@@ -4,9 +4,9 @@
   "DOWNLOAD": "https://github.com/JonnyOThan/RasterPropMonitor/releases",
   "VERSION":
   {
-    "MAJOR": 0,
-    "MINOR": 31,
-    "PATCH": 13,
+    "MAJOR": 1,
+    "MINOR": 2,
+    "PATCH": 3,
     "BUILD": 4
   },
   "KSP_VERSION":
