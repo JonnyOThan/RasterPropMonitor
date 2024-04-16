@@ -1,6 +1,6 @@
 # RasterPropMonitor
 
-To view this document with formatting, refer to https://github.com/JonnyOThan/RasterPropMonitor/blob/master/README.md
+To view this document with formatting, refer to https://github.com/FirstPersonKSP/RasterPropMonitor/blob/master/README.md
 
 RasterPropMonitor (RPM) is a toolkit and plugin that provides drastically-increased functionality to the IVA
 mode in Kerbal Space Program.  Using RPM-enabled props, a player can control almost any aspect of spacecraft
@@ -53,7 +53,7 @@ JSIAdvTransparentPods is a separate mod created by JPLRepo.  It can be found on 
 ## GETTING SUPPORT
 Make sure you've installed Module Manager and followed the installation instructions above.  Then read [this post](https://forum.kerbalspaceprogram.com/index.php?/topic/83212-how-to-get-support-read-first/) and post a comment on [this thread](https://forum.kerbalspaceprogram.com/index.php?/topic/190737-18x-rasterpropmonitor-adopted/) that includes your ksp.log file and screenshots of the problem.  *If you don't include the log file you will probably not get help.*
 
-If you have a reproducible bug or suggestions for changes, you are welcome to open an issue on the [github issue tracker](https://github.com/JonnyOThan/RasterPropMonitor/issues).  Please first use the search feature to see if it's already been reported, and include your log file and screenshots in the issue.
+If you have a reproducible bug or suggestions for changes, you are welcome to open an issue on the [github issue tracker](https://github.com/FirstPersonKSP/RasterPropMonitor/issues).  Please first use the search feature to see if it's already been reported, and include your log file and screenshots in the issue.
 
 ## CONFIGURATION
 
@@ -143,10 +143,10 @@ See [the forum support thread](https://forum.kerbalspaceprogram.com/index.php?/t
 See [the dull^H^H^H^H full documentation](https://github.com/Mihara/RasterPropMonitor/wiki) in the wiki on GitHub.
 
 For the latest release notes, please refer to the wiki at
-[Changes in this version](https://github.com/JonnyOThan/RasterPropMonitor/wiki/Changes-in-this-version)
+[Changes in this version](https://github.com/FirstPersonKSP/RasterPropMonitor/wiki/Changes-in-this-version)
 
 Source code and full license information available at
-[GitHub](https://github.com/JonnyOThan/RasterPropMonitor/)
+[GitHub](https://github.com/FirstPersonKSP/RasterPropMonitor/)
 
 ## LICENSES
 

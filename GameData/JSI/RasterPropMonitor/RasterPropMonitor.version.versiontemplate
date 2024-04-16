@@ -1,7 +1,7 @@
 {
   "NAME": "RasterPropMonitor",
-  "URL": "https://raw.githubusercontent.com/JonnyOThan/RasterPropMonitor/master/GameData/JSI/RasterPropMonitor/RasterPropMonitor.version",
-  "DOWNLOAD": "https://github.com/JonnyOThan/RasterPropMonitor/releases",
+  "URL": "https://raw.githubusercontent.com/FirstPersonKSP/RasterPropMonitor/master/GameData/JSI/RasterPropMonitor/RasterPropMonitor.version",
+  "DOWNLOAD": "https://github.com/FirstPersonKSP/RasterPropMonitor/releases",
   "VERSION":
   {
     "MAJOR": @VERSION_MAJOR@,
