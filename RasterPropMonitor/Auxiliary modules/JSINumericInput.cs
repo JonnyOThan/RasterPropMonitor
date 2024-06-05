@@ -1,4 +1,4 @@
-﻿/*****************************************************************************
+/*****************************************************************************
  * RasterPropMonitor
  * =================
  * Plugin for Kerbal Space Program
@@ -234,7 +234,7 @@ namespace JSI
             private float delta = 0.0f;
             private double pressStart = 0.0;
             private double lastUpdate = 0.0;
-            private readonly float increment = 0.0f;
+            private readonly VariableOrNumber increment = null;
             private readonly FloatCurve incrementCurve = null;
             private bool pressed = false;
             private readonly bool pressAndHold = false;
@@ -258,11 +258,10 @@ namespace JSI
                     throw new Exception("USERINPUTSET missing increment or incrementCurve, or it has both");
                 }
 
-                if (node.HasValue("increment") && !float.TryParse(node.GetValue("increment"), out increment))
-                {
-                    throw new Exception("USERINPUTSET bad increment");
-                }
-                else if (node.HasNode("incrementCurve"))
+                RasterPropMonitorComputer rpmComp = RasterPropMonitorComputer.FindFromProp(internalProp);
+                increment = rpmComp.InstantiateVariableOrNumber(node.GetValue("increment"));
+                
+                if (node.HasNode("incrementCurve"))
                 {
                     ConfigNode incNode = node.GetNode("incrementCurve");
                     string[] keys = incNode.GetValues("key");
@@ -401,7 +400,7 @@ namespace JSI
 
             private void Click()
             {
-                delta += increment;
+                delta += increment.AsFloat();
                 pressed = true;
             }
 
